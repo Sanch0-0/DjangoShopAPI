@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
 from .models import User
+from cart.models import Cart
 
 
 class RegistrationSerializer(serializers.Serializer):
@@ -23,10 +24,12 @@ class RegistrationSerializer(serializers.Serializer):
         return attrs
 
     def save(self):
-        return User.objects.create(
+        user = User.objects.create(
             email=self.validated_data['email'],
             password=self.validated_data['password1']
         )
+        Cart.objects.create(user=user)
+        return user
 
 
 class UpdateSerializer(serializers.ModelSerializer):
