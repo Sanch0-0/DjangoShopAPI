@@ -10,15 +10,18 @@ class Cart(models.Model):
     def products_count(self) -> int:
         products = self.products.values_list("quantity", flat=True)
         return sum(products)
-    
+
     @property
-    def total_sum(self):
+    def total_price_with_discount(self):
         total = 0
         for product in self.products.all():
             total += product.clothes.price_with_discount * product.quantity
-        
         return total
 
+    @property
+    def total_price(self):
+        products = self.products.values_list("clothes__price", "quantity")
+        return sum(map(lambda product: product[0] * product[1], products))
 
 
 

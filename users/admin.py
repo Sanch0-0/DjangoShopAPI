@@ -22,7 +22,7 @@ class UserAdmin(admin.ModelAdmin):
         (
             None,
             {
-                "fields": ['email', 'full_name', 'bio', 'date_joined', 'last_login', 'is_active']
+                "fields": ['email', 'full_name', 'date_joined', 'last_login', 'is_active']
             }
         )
     ]
