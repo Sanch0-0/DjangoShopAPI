@@ -37,5 +37,4 @@ class UpdateSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "full_name",
-            "bio"
         ]
